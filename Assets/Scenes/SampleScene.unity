@@ -854,7 +854,7 @@ MonoBehaviour:
   RT: {fileID: 8400000, guid: c6dedd8e3e1e35f42b08980fda903e53, type: 2}
   Size: 4
   Strength: 1
-  Radius: 4
+  Radius: 80
 --- !u!1 &1439379874
 GameObject:
   m_ObjectHideFlags: 0

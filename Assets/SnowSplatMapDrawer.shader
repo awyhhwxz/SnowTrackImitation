@@ -5,9 +5,9 @@
 		_SplatMap ("Texture", 2D) = "white" {}
 		_DrawColor("Draw Color", Color) = (0, 0, 0, 1)
 		_Coordination("Coordination", Vector) = (0, 0, 0, 0)
-		_ShaderSize("Shader Size", Range(0, 500)) = 50
-		_ShaderStrength("Shader Strength", Range(0, 1)) = 0.5
-		_ShaderRadius("Shader Radius", Range(0, 4)) = 1
+		_ShaderSize("Shader Size", Range(0, 500)) = 4
+		_ShaderStrength("Shader Strength", Range(0, 1)) = 1
+		_ShaderRadius("Shader Radius", Range(0, 200)) = 80
 	}
 	SubShader
 	{

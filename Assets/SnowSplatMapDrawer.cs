@@ -11,18 +11,17 @@ public class SnowSplatMapDrawer : MonoBehaviour {
     private RaycastHit _raycastHit;
 
     [Range(0, 500)]
-    public float Size = 50;
+    public float Size = 4;
     [Range(0, 1)]
     public float Strength = 1;
-    [Range(0, 4)]
-    public float Radius = 1;
+    [Range(0, 200)]
+    public float Radius = 80;
 
 	// Use this for initialization
 	void Start ()
     {
         _drawMaterial = new Material(DrawShader);
         _drawMaterial.SetColor("_DrawColor", Color.red);
-        _drawMaterial.SetTexture("_SplatMap", RT);
 
         var tempRT = RenderTexture.GetTemporary(RT.width, RT.height);
         var initializeMaterial = new Material(Resources.Load<Shader>("Shader/PureColorDrawShader"));
@@ -35,7 +34,7 @@ public class SnowSplatMapDrawer : MonoBehaviour {
     {
         foreach (var drawPainter in DrawPainterList)
         {
-            if (Physics.Raycast(drawPainter.transform.position, -drawPainter.transform.up, out _raycastHit, 1, LayerMask.GetMask("Ground")))
+            if (Physics.Raycast(drawPainter.transform.position, -Vector3.up, out _raycastHit, 1, LayerMask.GetMask("Ground")))
             {
                 _drawMaterial.SetVector("_Coordination", new Vector4(_raycastHit.textureCoord.x, _raycastHit.textureCoord.y, 0, 0));
                 _drawMaterial.SetFloat("_ShaderSize", Size);
@@ -43,6 +42,7 @@ public class SnowSplatMapDrawer : MonoBehaviour {
                 _drawMaterial.SetFloat("_ShaderRadius", Radius);
                 var tempRT = RenderTexture.GetTemporary(RT.width, RT.height, 0, RenderTextureFormat.ARGBFloat);
                 Graphics.Blit(RT, tempRT);
+                _drawMaterial.SetTexture("_SplatMap", tempRT);
                 Graphics.Blit(tempRT, RT, _drawMaterial);
                 RenderTexture.ReleaseTemporary(tempRT);
             }
